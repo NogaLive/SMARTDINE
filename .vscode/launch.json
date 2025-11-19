@@ -1,0 +1,39 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug Svc Menus (Venv)",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "src.main:app",
+                "--reload",
+                "--port",
+                "8001"
+            ],
+            "cwd": "${workspaceFolder}\\svc-menus",
+            "python": "${workspaceFolder}\\svc-menus\\.venv\\Scripts\\python.exe",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}\\svc-menus"
+            }
+        },
+        {
+            "name": "Debug Svc Orders (Venv)",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "src.main:app",
+                "--reload",
+                "--port",
+                "8002"
+            ],
+            "cwd": "${workspaceFolder}\\svc-orders",
+            "python": "${workspaceFolder}\\svc-orders\\.venv\\Scripts\\python.exe",
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}\\svc-orders"
+            }
+        }
+    ]
+}

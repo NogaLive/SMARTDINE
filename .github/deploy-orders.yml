@@ -1,0 +1,31 @@
+# .github/workflows/deploy-orders.yml
+name: SmartDine CI/CD Pipeline
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  build-test-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.12'
+          
+      - name: Install Dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install pytest safety
+          
+      - name: Security Check (SCA)
+        run: safety check -r requirements.txt
+        
+      - name: Run Tests
+        run: pytest tests/
+        
+      - name: Build Docker Image
+        run: docker build -t smartdine/orders:${{ github.sha }} .
